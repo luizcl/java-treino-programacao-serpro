@@ -14,6 +14,10 @@ public class Conta {
 		return saldo;
 	}
 
+	public void addValor(double valor){
+		this.saldo += valor;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}

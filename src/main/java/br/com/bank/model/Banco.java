@@ -1,11 +1,11 @@
 package br.com.bank.model;
 
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 public class Banco {
 
@@ -15,19 +15,38 @@ public class Banco {
         this.nome = nome;
     }
 
-    private List<Conta> contas = new ArrayList<>();
+    public String getNome(){
+        return this.nome;
+    }
+
+    private Map<String, Conta> contas = new HashMap<String, Conta>();
 
     public void adicionarConta(Conta conta) {
-        contas.add(conta);
+        contas.put(conta.getCpf(),conta);
     }
     public Conta pesquisarContaDoCliente(String cpf) {
-        Conta c = null;
-        for (int i = 0; i < contas.size(); i++) {
-            if (contas.get(i).getCpf().equals(cpf)) {
-                c = contas.get(i);
+        return contas.get(cpf);
+    }
+
+    public Long pesquisaBinariaContaDosClientes(String cpf){
+        List<Long> lContas = new ArrayList<>(contas.values().stream().map(x -> Long.valueOf(x.getCpf()))
+            .sorted().collect(Collectors.toList()));
+
+        int inicio = 0, meio, fim = lContas.size();
+        Long aux_cpf = Long.valueOf(cpf);
+        while(inicio != fim){
+            meio = inicio + fim /2;
+            Long c = lContas.get(meio);
+            if(c == aux_cpf){
+                return c;
+            }
+            if(aux_cpf > c){
+                inicio = meio;
+            } else if(aux_cpf < c){
+                fim = meio;
             }
         }
-        return c;
+        return null;
     }
 
     public List<Conta> listarContasAltaRenda() {
@@ -35,6 +54,6 @@ public class Banco {
     }
 
     private List<Conta> filtrarContas(Predicate<Conta> filtro) {
-        return contas.stream().filter(filtro).collect(Collectors.toList());
+        return contas.values().stream().filter(filtro).collect(Collectors.toList());
     }
 }
