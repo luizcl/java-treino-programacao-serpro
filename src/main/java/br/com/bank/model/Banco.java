@@ -46,7 +46,7 @@ public class Banco {
                 fim = meio;
             }
         }
-        return null;
+        return 0L;
     }
 
     public List<Conta> listarContasAltaRenda() {

@@ -37,7 +37,7 @@ class CaminhoArquivoTest {
         assertEquals(Paths.get("/tmp/3"), caminhoArquivo.getDiretorio());
         assertEquals(Paths.get("/tmp/3/2001"), caminhoArquivo.getArquivo());
 
-        caminhoArquivo = CaminhoArquivo.getInstance();
+        caminhoArquivo = CaminhoArquivo.getInstance(null);
         assertEquals(null, caminhoArquivo.getDiretorio());
         assertEquals(null, caminhoArquivo.getArquivo());
     }

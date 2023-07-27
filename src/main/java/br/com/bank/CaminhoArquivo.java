@@ -23,11 +23,6 @@ public class CaminhoArquivo {
     public Path getArquivo() {
         return arquivo;
     }
-    
-    public static CaminhoArquivo getInstance(){
-        
-        return new CaminhoArquivo(null,null);
-    }
 
     public static CaminhoArquivo getInstance(Integer id) {
         String b = "/tmp/";
@@ -47,17 +42,20 @@ public class CaminhoArquivo {
             }
         }
         */
-        
-        int i = id/1000;
-        if(id <= (i * 1000)){
-            d = b + i;
+        if(id != null){
+            int i = id/1000;
+            if(id <= (i * 1000)){
+                d = b + i;
+            }
+            else{
+                i++;
+                d = b + i;
+            }
+            String arquivo = d + '/' + id.toString();
+            return new CaminhoArquivo(Paths.get(d), Paths.get(arquivo));
+        }else{
+            return new CaminhoArquivo(null, null);
         }
-        else{
-            i++;
-            d = b + i;
-        }
-        String arquivo = d + '/' + id.toString();
-        return new CaminhoArquivo(Paths.get(d), Paths.get(arquivo));
 
     }
 
