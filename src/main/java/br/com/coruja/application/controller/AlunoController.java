@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.coruja.application.domain.model.Aluno;
 import br.com.coruja.application.domain.service.AlunoService;
 
+/*
+ * Essa classe precisa estar neste pacote pois o spring 
+ * só reconhece os endpoints de quem está no mesmo pacote
+ * do annotation @SpringBootApplication
+ */
+
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {
@@ -55,10 +61,9 @@ public class AlunoController {
         if(salvo != null){
             return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
         }else{
-            return ResponseEntity.ok(a);
-            /*return ResponseEntity.notFound().
+            return ResponseEntity.noContent().
                     header("Aluno não salvo", a.getNome()).
-                    build();*/
+                    build();
         }
     }
 
