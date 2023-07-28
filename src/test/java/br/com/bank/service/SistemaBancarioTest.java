@@ -14,6 +14,9 @@ import org.mockito.junit.jupiter.MockitoSettings;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -44,12 +47,19 @@ class SistemaBancarioTest {
 
     @Test
     public void testMock(){
-        Banco b = new Banco("Banco do Brasil");
-        when(bacen.cadastrarBanco(b)).thenReturn(123L);
+        /* Caso o cadastro do banco no Bacen tenha sido feito com sucesso, 
+            ele retorna o número de registro do Banco */
+        when(bacen.cadastrarBanco(any(Banco.class)))
+            .thenReturn(123L);
 
-        assertEquals(123, bacen.cadastrarBanco(b));
+        assertEquals(123L, bacen.cadastrarBanco(new Banco("AAA")));
 
-        when(bacen.cadastrarBanco(any())).thenThrow(BancoNaoCadastradoException.class);
+        /* Caso o cadastro do banco no Bacen tenha dado algum problema, 
+            a exceção BancoNaoCadastradoException do tipo RuntimeException deve ser retornada. 
+            Use o assertThrows para isso. */
+        when(bacen.cadastrarBanco(any(Banco.class)))
+            .thenThrow(BancoNaoCadastradoException.class);
+        
         assertThrows(BancoNaoCadastradoException.class, 
             () -> bacen.cadastrarBanco(new Banco("Santander")), "Banco não cadastrado");
     }
