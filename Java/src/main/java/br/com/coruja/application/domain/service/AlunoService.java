@@ -1,12 +1,12 @@
-package br.com.coruja.domain.service;
+package br.com.coruja.application.domain.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.coruja.domain.model.Aluno;
-import br.com.coruja.domain.repository.AlunoRepository;
+import br.com.coruja.application.domain.model.Aluno;
+import br.com.coruja.application.domain.repository.AlunoRepository;
 
 @Service
 public class AlunoService {

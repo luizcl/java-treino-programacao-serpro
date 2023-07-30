@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.coruja.domain.model.Aluno;
-import br.com.coruja.domain.service.AlunoService;
+import br.com.coruja.application.domain.model.Aluno;
+import br.com.coruja.application.domain.service.AlunoService;
 
 /*
  * Essa classe precisa estar neste pacote pois o spring 

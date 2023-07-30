@@ -1,4 +1,4 @@
-package br.com.coruja.domain.model;
+package br.com.coruja.application.domain.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +16,10 @@ public class Aluno {
     @NonNull
     String nome;
     String email;
+
+    public Aluno(){
+        
+    }
 
     public Aluno(String nome){
         this.nome = nome;
