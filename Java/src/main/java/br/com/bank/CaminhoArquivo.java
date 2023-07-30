@@ -27,21 +27,6 @@ public class CaminhoArquivo {
     public static CaminhoArquivo getInstance(Integer id) {
         String b = "/tmp/";
         String d = null;
-        /*
-        if (id <= 1000) {
-            d = b + id;
-        } else {
-            int i = id;
-            boolean f = true;
-            while (f) {
-                if (id <= (i * 1000)) {
-                    d = b + i;
-                    f = false;
-                }
-                i++;
-            }
-        }
-        */
         if(id != null){
             int i = id/1000;
             if(id > (i * 1000)){

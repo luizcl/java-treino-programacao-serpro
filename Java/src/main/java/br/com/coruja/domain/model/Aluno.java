@@ -1,4 +1,4 @@
-package br.com.coruja.application.domain.model;
+package br.com.coruja.domain.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

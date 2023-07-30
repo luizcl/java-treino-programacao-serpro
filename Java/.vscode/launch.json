@@ -9,16 +9,6 @@
             "projectName": "java-serpro",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-Application<java-serpro>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "br.com.coruja.application.Application",
-            "projectName": "java-serpro",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
