@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import br.com.bank.model.Banco;
@@ -15,10 +16,10 @@ public class BancoTest {
     private Banco b = new Banco(nome);
 
     private List<Conta> mockContaRepository;
-
+    private final int max = 100000;
     public void initValues(){
         mockContaRepository = new ArrayList<>();
-        for (int i = 1; i <= 100000; i++) {
+        for (int i = 1; i <= max; i++) {
             String cpf = String.format("%011d", i);
             mockContaRepository.add(new Conta(cpf));
         }
@@ -53,5 +54,42 @@ public class BancoTest {
         List<Conta> contas = b.listarContasAltaRenda();
         contas.forEach(x -> assertTrue(x.getSaldo() >= 10000));
         assertEquals(numAltaRenda, contas.size());
+
+        Conta c;
+
+        String cpf = String.format("%011d", 500);
+        long inicio = System.nanoTime();
+        c = b.pesquisarContaDoClienteOld(cpf);
+        long fim = System.nanoTime();
+        long duracao = fim - inicio;
+        assertEquals(c.getCpf(),cpf);
+
+        inicio = System.nanoTime();
+        c = b.pesquisarContaDoCliente(cpf);
+        fim = System.nanoTime();
+        long duracao2 = fim - inicio;
+        assertEquals(c.getCpf(),cpf);
+
+        inicio = System.nanoTime();
+        c = b.pesquisarContaDoClienteOldBreak(cpf);
+        fim = System.nanoTime();
+        long duracao3 = fim - inicio;
+        assertEquals(c.getCpf(),cpf);
+
+        b.ordenarContas();
+        inicio = System.nanoTime();
+        c = b.pesquisaBinariaContaDosClientes(cpf);
+        fim = System.nanoTime();
+        long duracao4 = fim - inicio;
+        assertEquals(c.getCpf(),cpf);
+
+        System.out.println("Duração do método antigo: " + duracao);
+        System.out.println("Duração do método usando map: " + duracao2);
+        System.out.println("Duração do método com o break: " + duracao3);
+        System.out.println("Duração do método usando pesquisa Binária: " + duracao4);
+
+        assertTrue(duracao2<duracao);
+
     }
+
 }
